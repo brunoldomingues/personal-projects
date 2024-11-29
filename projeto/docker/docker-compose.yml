@@ -6,7 +6,7 @@ services:
     image: jwilder/whoami
     container_name: whoami
     ports:
-      - "8080:80"
+      - "8080:8000"
 
   # Banco de Dados do Zabbix
   zabbix-db:
