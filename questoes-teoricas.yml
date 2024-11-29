@@ -1,0 +1,34 @@
+Questões teóricas
+
+
+1 - Descreva, de forma resumida, a lógica de funcionamento e o objetivo da funcionalidade
+“healthcheck” em micro serviços.
+
+R: O objetivo do 'healthcheck' é verificar a saúde de micro serviços, garantindo seu correto funcionamento. Pode-se configurar em endpoints (como por exemplo '/status') onde o envio de requisições devem retornar status de código 200 (OK) caso o sistema estiver funcionando.
+
+2 - Quais tecnologias você utilizaria para monitorar um ambiente de micro serviços?
+
+R:
+
+Zabbix: Para alertas, analise de dados históricos e monitoramento completo do ambiente.
+
+Grafana: Para montagem de dashboards com painéis para visualização do ambiente (alertas, metricas, dados, etc), usando o Zabbix como base de dados para coleta.
+
+
+3 - Como funciona um proxy reverso?
+
+R: O proxy reverso (um servidor) atua no recebimento de requisições externas e direciona para os servidores de aplicação. Pode ser usado no balanceamento do trafego (load balancer), cache e segurança.
+
+4 - Quais métodos você considera eficazes para a disponibilização de uma aplicação de alta
+disponibilidade.
+
+R: Em um ambiente de containers, podemos fazer o uso de clusters, load balancer, replicação de dados em diferentes zonas de disponibilidade.
+
+5 - Como funciona a persistência de logs em micro serviços? Conhece alguma ferramenta?
+
+R: Como cada serviço atua de maneira isolada e independente, cada micro serviço gera seu próprio log. Eles são coletados por ferramentas, como por exemplo CloudWatch (solução AWS) ou Elasticsearch.
+
+6 - Você precisa fazer o envio de um conjunto de arquivos de 50Gb para um cliente. Quais aspectos
+você considera importantes para executar essa atividade de forma otimizada e segura?
+
+R: Para enviar um conjunto de arquivos de 50GB, podemos dividir os arquivos em partes menores e comprimi-los para facilitar a transferencia. Podemos fazer a transferencia via SFTP, sendo uma maneira segura de movimentar esses arquivos.
