@@ -1,5 +1,4 @@
 services:
-  # Outros serviços
   whoami:
     image: jwilder/whoami
     ports:
