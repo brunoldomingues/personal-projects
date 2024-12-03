@@ -1,0 +1,19 @@
+---
+- name: Garantir que o diretório do nginx existe
+  file:
+    path: "/opt/nginx"
+    state: directory
+
+- name: Copiando arquivo de configuração do nginx
+  copy:
+    src: nginx.conf
+    dest: /etc/nginx/nginx.conf
+    owner: root
+    group: root
+    mode: '0644'
+
+- name: Garantir que o serviço do Nginx está ativo e rodando
+  systemd:
+    name: nginx
+    state: started
+    enabled: yes

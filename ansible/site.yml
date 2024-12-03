@@ -1,0 +1,61 @@
+- hosts: local
+  become: yes
+
+  tasks:
+    - name: Criar o diretório do projeto
+      ansible.builtin.file:
+        path: "{{ project_dir }}"
+        state: directory
+        mode: '0755'
+
+    - name: Garantir a instalação do Docker
+      ansible.builtin.yum:
+        name: docker
+        state: present
+
+    - name: Iniciar serviço Docker
+      ansible.builtin.service:
+        name: docker
+        state: started
+        enabled: true
+
+    - name: Verificar se o Docker está funcionando
+      ansible.builtin.command:
+        cmd: docker info
+      register: docker_info
+      failed_when: docker_info.rc != 0
+      retries: 5
+      delay: 10
+      until: docker_info.rc == 0
+
+    - name: Copiar arquivo docker-compose
+      ansible.builtin.copy:
+        src: "roles/docker/files/docker-compose.yml"
+        dest: "{{ project_dir }}/docker-compose.yml"
+
+    - name: Garantir que o NGINX esteja configurado dentro do Docker
+      ansible.builtin.copy:
+        src: "{{ project_dir }}/ansible/roles/nginx/files/nginx.conf"
+        dest: "{{ project_dir }}/nginx/nginx.conf"
+        owner: root
+        group: root
+        mode: '0644'
+
+    - name: Executar Docker Compose
+      community.docker.docker_compose_v2:
+        project_src: "{{ project_dir }}"
+        state: present
+      retries: 5
+      delay: 10
+
+    - name: Criar arquivo de texto com endereços
+      ansible.builtin.copy:
+        dest: /tmp/projetobrunodevops/servicos_urls.txt
+        content: |
+          Grafana: http://localhost:3000/login
+          usuário: admin | senha: admin
+
+          Zabbix Web: http://localhost:8081
+          usuário: Admin | senha: zabbix
+
+          Whoami: http://localhost:8082

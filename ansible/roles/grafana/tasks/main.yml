@@ -1,0 +1,10 @@
+- name: Garantir que serviço Grafana está rodando
+  community.docker.docker_container:
+    name: grafana
+    image: grafana/grafana:latest
+    state: started
+    ports:
+      - "3000:3000"
+    depends_on:
+      - zabbix-server
+    restart_policy: always

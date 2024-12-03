@@ -1,0 +1,12 @@
+- name: Garantir que db PostgreSQL está rodando
+  community.docker.docker_container:
+    name: zabbix-db
+    image: postgres:15
+    state: started
+    environment:
+      POSTGRES_DB: zabbix
+      POSTGRES_USER: zabbix
+      POSTGRES_PASSWORD: zabbix_password
+    volumes:
+      - zabbix-db-data:/var/lib/postgresql/data
+    restart_policy: always

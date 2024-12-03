@@ -1,0 +1,20 @@
+- name: Instalação do Docker
+  ansible.builtin.yum:
+    name: docker
+    state: present
+
+- name: Garantir inicialização do serviço de Docker
+  ansible.builtin.service:
+    name: docker
+    state: started
+    enabled: true
+
+- name: Copiar arquivo docker-compose
+  ansible.builtin.copy:
+    src: "{{ project_dir }}/ansible/roles/docker/files/docker-compose.yml"
+    dest: "{{ project_dir }}/docker-compose.yml"
+
+- name: Ativação do docker-compose para inicializar serviços
+  community.docker.docker_compose_v2:
+    project_src: "{{ project_dir }}"
+    state: present

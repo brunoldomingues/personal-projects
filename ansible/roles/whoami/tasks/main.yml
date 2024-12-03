@@ -1,0 +1,8 @@
+- name: Garantir que serviço Whoami está rodando
+  community.docker.docker_container:
+    name: whoami
+    image: jwilder/whoami
+    state: started
+    ports:
+      - "8082:80"
+    restart_policy: always
