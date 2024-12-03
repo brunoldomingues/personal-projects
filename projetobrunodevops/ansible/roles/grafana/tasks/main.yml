@@ -1,3 +1,4 @@
+---
 - name: Garantir que serviço Grafana está rodando
   community.docker.docker_container:
     name: grafana

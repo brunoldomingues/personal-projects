@@ -1,3 +1,4 @@
+---
 - name: Instalação do Docker
   ansible.builtin.yum:
     name: docker
