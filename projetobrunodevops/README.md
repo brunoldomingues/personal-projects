@@ -5,8 +5,11 @@ Esta documentação tem por objetivo demonstrar a estrutura de código para serv
 ### Premissas:
 
 1 - O projeto foi desenvolvido para Linux;
+
 2 - Para execução do código, usuário deverá ter privilégios 'root' (sudo -i);
-3 - Baixe o projeto no diretório ' /tmp '
+
+3 - Baixe o projeto no diretório ' /tmp/projetobrunodevops '
+
 4 - Não foi possível criar um subdominio para o projeto, portanto, o mesmo é executado localmente (localhost);
 
 
